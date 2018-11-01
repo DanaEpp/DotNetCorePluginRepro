@@ -31,7 +31,8 @@ You will then need to make the following changes:
 2. Add your **tenant** in `AzureResourceManager.cs` in the `TestPluginFramework` project
 3. Add your **client id** and **app key** generated with Azure AD in `AzureResourceManager.cs` in the `TestPluginFramework` project
 4. Add a breakpoint in the catch block of `TestPlugin.cs`
-5. Build and run the program in debug
+5. Create a **Plugins** folder at `TestPluginConsole\bin\Debug\netcoreapp2.1\Plugins`
+6. Build and run the program in debug
 
 If anyone has any ideas to why this is failing, please let me know. 
  
