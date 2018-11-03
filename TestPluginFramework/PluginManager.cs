@@ -1,11 +1,10 @@
-﻿using McMaster.NETCore.Plugins;
-using Microsoft.Azure;
-using Microsoft.Rest;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+using McMaster.NETCore.Plugins;
+using Microsoft.Rest;
+using Newtonsoft.Json.Linq;
 
 namespace TestPluginFramework
 {
@@ -16,15 +15,16 @@ namespace TestPluginFramework
             var loaders = new List<PluginLoader>();
             var plugins = new List<IDataCollectorPlugin>();
 
-            foreach (var file in Directory.GetFiles(pluginsDir, "*.dll"))
+            foreach (var depsFile in Directory.GetFiles(pluginsDir, "*.deps.json"))
             {
-                var dllFile = Directory.GetCurrentDirectory() + file;
+                var dllFile = depsFile.Replace(".deps.json", ".dll");
                 var loader = PluginLoader.CreateFromAssemblyFile(
                     dllFile, 
                     sharedTypes: new[] 
                     {
                         typeof(IDataCollectorPlugin),
-                        typeof(TokenCredentials)
+                        typeof(TokenCredentials),
+                        typeof(JObject),
                     }
                 );
 
